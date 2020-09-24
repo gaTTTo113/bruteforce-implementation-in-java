@@ -21,7 +21,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             result.add(1);
         }
-        // start brute
+        // start brute algorithm
         System.out.println(bruteForce(n, items, c, 0));
         // print answer
         for (Integer index : result) {
@@ -33,12 +33,15 @@ public class Main {
     public static int bruteForce(int count_iterations, List<Item> items, int capacity, int iteration) {
         int in;
         int out;
+        // exit status check here
         if (iteration == count_iterations || capacity <= 0) {
             return 0;
         }
+        
         if (items.get(iteration).weight > capacity) {
             out = bruteForce(count_iterations, items, capacity, iteration + 1);
             return out;
+        // if item capacity is more than container can place
         } else {
             in = bruteForce(count_iterations, items, capacity - items.get(iteration).weight, iteration + 1) + items.get(iteration).value;
             out = bruteForce(count_iterations, items, capacity, iteration + 1);
@@ -54,7 +57,7 @@ public class Main {
         }
     }
 
-
+    // not part of algorithm, just reading values
     public static void readFromFile(String path) throws IOException {
         BufferedReader bfr = new BufferedReader(new FileReader(path));
         String[] line = bfr.readLine().split(" ");
